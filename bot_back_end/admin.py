@@ -6,21 +6,34 @@ from .models import Code_filial_2_name_filial, Depart_filial_2_phone_number
 from .models import Worktime
 
 
-class Depart_filial_2_phone_numberInlines(admin.StackedInline):
-    model = Depart_filial_2_phone_number
-    extra = 3
+class FilialAdmin(admin.ModelAdmin):
+    fields=['name','code_filial']
+    list_display = ('name', 'code_filial', 'was_set_worktime')
+    list_filter = ['name']
 
 
-class FilialInfo(admin.ModelAdmin):
-    fieldsets =[
-        ('Названиe филиала',                  {'fields': ['name']}),
-        ('Код филиала',         {'fields': ['code_filial']}),
-    ]
-    #inlines = [Depart_filial_2_phone_numberInlines]
+class Three_categoriesAdmin(admin.ModelAdmin):
+    fields=['text','category']
+    list_display = ('text','category')
 
 
-admin.site.register(Code_filial_2_name_filial, FilialInfo)
-admin.site.register(Three_categories)
-admin.site.register(Category_managers)
-admin.site.register(Depart_filial_2_phone_number)
-admin.site.register(Worktime)
+class Category_managersAdmin(admin.ModelAdmin):
+    fields=['text', 'phone_number', 'name_man']
+    list_display = ('text', 'phone_number', 'name_man')
+
+
+class Depart_filial_2_phone_numberAdmin(admin.ModelAdmin):
+    fields=['depart', 'filial', 'phone_number', 'info']
+    list_display = ('depart', 'filial', 'phone_number', 'info')
+
+
+class WorktimeAdmin(admin.ModelAdmin):
+    fields=['filial', 'time_open', 'time_close']
+    list_display = ('filial', 'time_open', 'time_close')
+
+
+admin.site.register(Code_filial_2_name_filial, FilialAdmin)
+admin.site.register(Three_categories, Three_categoriesAdmin)
+admin.site.register(Category_managers, Category_managersAdmin)
+admin.site.register(Depart_filial_2_phone_number, Depart_filial_2_phone_numberAdmin)
+admin.site.register(Worktime, WorktimeAdmin)

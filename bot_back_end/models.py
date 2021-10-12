@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib import admin
+from django.shortcuts import get_object_or_404
 
 # Create your models here.
 class Three_categories(models.Model):
@@ -27,6 +29,17 @@ class Code_filial_2_name_filial(models.Model):
     name = models.CharField('название филиала', max_length=50)
     def __str__(self):
         return self.name
+    @admin.display(
+        boolean=True,
+        ordering='name',
+        description='время работы установлено?',
+    )
+    def was_set_worktime(self):
+        worktime_bool = Worktime.objects.filter(filial=self.name)
+        if worktime_bool:
+            return True
+        else:
+            return False
     class Meta:
             verbose_name = 'Название филиала'
             verbose_name_plural = 'Назавания филиалов'
@@ -40,8 +53,8 @@ class Depart_filial_2_phone_number(models.Model):
     def __str__(self):
         return self.depart
     class Meta:
-            verbose_name = 'Доб.номер'
-            verbose_name_plural = 'Доб.номера'
+            verbose_name = 'Доб.номер отдела'
+            verbose_name_plural = 'Доб.номера отделов'
 
 
 class Worktime(models.Model):
