@@ -32,8 +32,14 @@ class WorktimeAdmin(admin.ModelAdmin):
     list_display = ('filial', 'time_open', 'time_close')
 
 
+class Repeat_halloAdmin(admin.ModelAdmin):
+    fields=['time_repeat', 'times_repeat', 'phrase_repeat']
+    list_display = ('times_repeat', 'times_repeat', 'phrase_repeat')
+
+
 admin.site.register(Code_filial_2_name_filial, FilialAdmin)
 admin.site.register(Three_categories, Three_categoriesAdmin)
 admin.site.register(Category_managers, Category_managersAdmin)
 admin.site.register(Depart_filial_2_phone_number, Depart_filial_2_phone_numberAdmin)
 admin.site.register(Worktime, WorktimeAdmin)
+admin.site.register(Repeat_halloAdmin, Repeat_halloAdmin)

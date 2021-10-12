@@ -66,3 +66,14 @@ class Worktime(models.Model):
     class Meta:
             verbose_name = 'Время работы'
             verbose_name_plural = 'Время работы'
+
+
+class Repeat_hallo(models.Model):
+    time_repeat = models.FloatField('время в секундах после фразы клиента')
+    times_repeat= models.IntegerField('количестово повторов')
+    phrase_repeat=models.CharField('фраза для повтора', max_length=50)
+    def __str__(self):
+        return self.filial
+    class Meta:
+            verbose_name = 'Фраза: я вас слушаю'
+            verbose_name_plural = 'Фразы: я вас слушаю'
