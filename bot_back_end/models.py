@@ -3,9 +3,12 @@ from django.db import models
 # Create your models here.
 class Three_categories(models.Model):
     text = models.CharField('key word', max_length=50)
-    category = models.CharField('category of word (or depart)', max_length=50)
+    category = models.IntegerField('Category of key word')
     def __str__(self):
         return self.text
+    class Meta:
+            verbose_name = 'Ключевое слово'
+            verbose_name_plural = 'Ключевые слова'
 
 
 class Category_managers(models.Model):
@@ -14,6 +17,17 @@ class Category_managers(models.Model):
     phone_number = models.CharField(max_length=12)
     def __str__(self):
         return self.text
+    class Meta:
+            verbose_name = 'Менеджер'
+            verbose_name_plural = 'Менеджеры'
+
+
+class Category_2_depart(models.Model):
+    category = models.IntegerField('Category of key word')
+    depart = models.CharField(max_length=50)
+    class Meta:
+            verbose_name = 'Название отдела'
+            verbose_name_plural = 'Назавания отделов'
 
 
 class Code_filial_2_name_filial(models.Model):
@@ -21,6 +35,9 @@ class Code_filial_2_name_filial(models.Model):
     name = models.CharField('name of city filial', max_length=100)
     def __str__(self):
         return self.name
+    class Meta:
+            verbose_name = 'Название филиала'
+            verbose_name_plural = 'Назавания филиалов'
 
 
 class Depart_filial_2_phone_number(models.Model):
@@ -30,6 +47,9 @@ class Depart_filial_2_phone_number(models.Model):
     info = models.CharField('info about depart', max_length=50)
     def __str__(self):
         return self.depart
+    class Meta:
+            verbose_name = 'Доб.номер'
+            verbose_name_plural = 'Доб.номера'
 
 
 class Worktime(models.Model):
@@ -38,3 +58,6 @@ class Worktime(models.Model):
     time_close =models.TimeField('time close')
     def __str__(self):
         return self.filial
+    class Meta:
+            verbose_name = 'Время работы'
+            verbose_name_plural = 'Время работы'
