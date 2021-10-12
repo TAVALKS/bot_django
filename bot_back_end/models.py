@@ -2,8 +2,8 @@ from django.db import models
 
 # Create your models here.
 class Three_categories(models.Model):
-    text = models.CharField('key word', max_length=50)
-    category = models.IntegerField('Category of key word')
+    text = models.CharField('ключ. слово', max_length=50)
+    category = models.CharField('категория ключ. слово (отдел или категория)', max_length=50)
     def __str__(self):
         return self.text
     class Meta:
@@ -12,9 +12,9 @@ class Three_categories(models.Model):
 
 
 class Category_managers(models.Model):
-    text = models.CharField('key word', max_length=50)
-    name_man = models.CharField('name of manager', max_length=100)
-    phone_number = models.CharField(max_length=12)
+    text = models.CharField('ключ. слово', max_length=50)
+    name_man = models.CharField('имя менеджера', max_length=100)
+    phone_number = models.CharField('доб. номер', max_length=12)
     def __str__(self):
         return self.text
     class Meta:
@@ -22,17 +22,9 @@ class Category_managers(models.Model):
             verbose_name_plural = 'Менеджеры'
 
 
-class Category_2_depart(models.Model):
-    category = models.IntegerField('Category of key word')
-    depart = models.CharField(max_length=50)
-    class Meta:
-            verbose_name = 'Название отдела'
-            verbose_name_plural = 'Назавания отделов'
-
-
 class Code_filial_2_name_filial(models.Model):
-    code_filial = models.IntegerField('city code of filial')
-    name = models.CharField('name of city filial', max_length=100)
+    code_filial = models.IntegerField('код города филиала')
+    name = models.CharField('название филиала', max_length=50)
     def __str__(self):
         return self.name
     class Meta:
@@ -41,10 +33,10 @@ class Code_filial_2_name_filial(models.Model):
 
 
 class Depart_filial_2_phone_number(models.Model):
-    depart = models.CharField('name of depart (or category)', max_length=50)
-    filial = models.CharField('name of city filial', max_length=50)
-    phone_number = models.IntegerField('phone number')
-    info = models.CharField('info about depart', max_length=50)
+    depart = models.CharField('отдел', max_length=50)
+    filial = models.CharField('город филиала', max_length=50)
+    phone_number = models.IntegerField('доб. номер')
+    info = models.CharField('инфо', max_length=50)
     def __str__(self):
         return self.depart
     class Meta:
@@ -53,9 +45,9 @@ class Depart_filial_2_phone_number(models.Model):
 
 
 class Worktime(models.Model):
-    filial = models.CharField('name of city filial', max_length=50)
-    time_open = models.TimeField('time open')
-    time_close =models.TimeField('time close')
+    filial = models.CharField('филиал', max_length=50)
+    time_open = models.TimeField('Начало рабочего дня')
+    time_close =models.TimeField('Конец рабочего дня')
     def __str__(self):
         return self.filial
     class Meta:
