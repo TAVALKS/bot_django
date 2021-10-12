@@ -73,7 +73,7 @@ class Repeat_hallo(models.Model):
     times_repeat= models.IntegerField('количестово повторов')
     phrase_repeat=models.CharField('фраза для повтора', max_length=50)
     def __str__(self):
-        return self.filial
+        return self.phrase_repeat
     class Meta:
             verbose_name = 'Фраза: я вас слушаю'
             verbose_name_plural = 'Фразы: я вас слушаю'

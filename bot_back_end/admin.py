@@ -3,7 +3,7 @@ from django.contrib import admin
 # Register your models here.
 from .models import Three_categories, Category_managers
 from .models import Code_filial_2_name_filial, Depart_filial_2_phone_number
-from .models import Worktime
+from .models import Worktime, Repeat_hallo
 
 
 class FilialAdmin(admin.ModelAdmin):
@@ -42,4 +42,4 @@ admin.site.register(Three_categories, Three_categoriesAdmin)
 admin.site.register(Category_managers, Category_managersAdmin)
 admin.site.register(Depart_filial_2_phone_number, Depart_filial_2_phone_numberAdmin)
 admin.site.register(Worktime, WorktimeAdmin)
-admin.site.register(Repeat_halloAdmin, Repeat_halloAdmin)
+admin.site.register(Repeat_hallo, Repeat_halloAdmin)
