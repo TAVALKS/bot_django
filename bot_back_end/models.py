@@ -5,7 +5,7 @@ from django.shortcuts import get_object_or_404
 # Create your models here.
 class Three_categories(models.Model):
     text = models.CharField('ключ. слово', max_length=50)
-    category = models.CharField('категория ключ. слово (отдел или категория)', max_length=50)
+    category = models.IntegerField('номер категории')
     def __str__(self):
         return self.text
     class Meta:
@@ -84,6 +84,17 @@ class Category_2_name_category(models.Model):
     name_category = models.CharField('название категории', max_length=20)
     def __str__(self):
         return self.name_category
+    @admin.display(
+        boolean=True,
+        ordering='name_category',
+        description='доб.номер установлен?',
+    )
+    def was_set_depart(self):
+        depart_bool = Depart_filial_2_phone_number.objects.filter(depart=self.name_category)
+        if depart_bool:
+            return True
+        else:
+            return False
     class Meta:
             verbose_name = 'Название категории'
             verbose_name_plural = 'Названия категорий'
