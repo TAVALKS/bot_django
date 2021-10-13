@@ -33,8 +33,8 @@ class WorktimeAdmin(admin.ModelAdmin):
 
 
 class Repeat_halloAdmin(admin.ModelAdmin):
-    fields=['time_repeat', 'times_repeat', 'phrase_repeat']
-    list_display = ('times_repeat', 'times_repeat', 'phrase_repeat')
+    fields=['phrase_repeat', 'time_repeat', 'times_repeat']
+    list_display = ('phrase_repeat', 'time_repeat', 'times_repeat')
 
 
 admin.site.register(Code_filial_2_name_filial, FilialAdmin)

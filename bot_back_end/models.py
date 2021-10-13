@@ -77,3 +77,13 @@ class Repeat_hallo(models.Model):
     class Meta:
             verbose_name = 'Фраза: я вас слушаю'
             verbose_name_plural = 'Фразы: я вас слушаю'
+
+
+class Category_2_name_category(models.Model):
+    category = models.IntegerField('номер категории')
+    name_category = models.CharField('название категории', max_length=20)
+    def __str__(self):
+        return self.name_category
+    class Meta:
+            verbose_name = 'Название категории'
+            verbose_name_plural = 'Названия категорий'

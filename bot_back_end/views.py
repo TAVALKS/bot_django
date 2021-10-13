@@ -3,8 +3,8 @@ from django.http import HttpResponse
 
 
 def index(request):
-    return HttpResponse("Hello, world. You're at the polls index.")
+    return render(request, 'bot_back_end/index.html')
 
 
 def about(request):
-    return HttpResponse("<h4>Created by TAVALKS<h4>")
+    return render(request, 'bot_back_end/about.html')
