@@ -26,23 +26,23 @@ class Category_managers(models.Model):
 
 class Code_filial_2_name_filial(models.Model):
     code_filial = models.IntegerField('код города филиала')
-    name = models.CharField('название филиала', max_length=50)
+    filial = models.CharField('название филиала', max_length=50)
     def __str__(self):
-        return self.name
+        return self.filial
     @admin.display(
         boolean=True,
-        ordering='name',
+        ordering='filial',
         description='время работы установлено?',
     )
     def was_set_worktime(self):
-        worktime_bool = Worktime.objects.filter(filial=self.name)
+        worktime_bool = Worktime.objects.filter(filial=self.filial)
         if worktime_bool:
             return True
         else:
             return False
     class Meta:
-            verbose_name = 'Название филиала'
-            verbose_name_plural = 'Назавания филиалов'
+            verbose_name = 'Филиал'
+            verbose_name_plural = 'Филиалы'
 
 
 class Depart_filial_2_phone_number(models.Model):
@@ -52,6 +52,19 @@ class Depart_filial_2_phone_number(models.Model):
     info = models.CharField('инфо', max_length=50)
     def __str__(self):
         return self.depart
+    @admin.display(
+        boolean=False,
+        ordering='depart',
+        description='доб.номер филиалов установлен?',
+    )
+    def was_set_filial(self):
+        filials_from_depart_table = Depart_filial_2_phone_number.objects.filter(depart=self.depart).values_list('filial')
+        filials_from_filial_table = Code_filial_2_name_filial.objects.all().values_list('filial')
+        filial_bool = set(filials_from_filial_table) - set(filials_from_depart_table)
+        if filial_bool:
+            return filial_bool
+        else:
+            return 'OK'
     class Meta:
             verbose_name = 'Доб.номер отдела'
             verbose_name_plural = 'Доб.номера отделов'
@@ -84,17 +97,6 @@ class Category_2_name_category(models.Model):
     name_category = models.CharField('название категории', max_length=20)
     def __str__(self):
         return self.name_category
-    @admin.display(
-        boolean=True,
-        ordering='name_category',
-        description='доб.номер установлен?',
-    )
-    def was_set_depart(self):
-        depart_bool = Depart_filial_2_phone_number.objects.filter(depart=self.name_category)
-        if depart_bool:
-            return True
-        else:
-            return False
     class Meta:
-            verbose_name = 'Название категории'
-            verbose_name_plural = 'Названия категорий'
+            verbose_name = 'Категория'
+            verbose_name_plural = 'Категории'

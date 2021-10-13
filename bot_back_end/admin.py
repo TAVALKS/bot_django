@@ -7,9 +7,9 @@ from .models import Worktime, Repeat_hallo, Category_2_name_category
 
 
 class FilialAdmin(admin.ModelAdmin):
-    fields=['name','code_filial']
-    list_display = ('name', 'code_filial', 'was_set_worktime')
-    list_filter = ['name']
+    fields=['filial','code_filial']
+    list_display = ('filial', 'code_filial', 'was_set_worktime')
+    list_filter = ['filial']
 
 
 class Three_categoriesAdmin(admin.ModelAdmin):
@@ -24,7 +24,7 @@ class Category_managersAdmin(admin.ModelAdmin):
 
 class Depart_filial_2_phone_numberAdmin(admin.ModelAdmin):
     fields=['depart', 'filial', 'phone_number', 'info']
-    list_display = ('depart', 'filial', 'phone_number', 'info')
+    list_display = ('depart', 'filial', 'phone_number', 'info', 'was_set_filial')
 
 
 class WorktimeAdmin(admin.ModelAdmin):
@@ -39,7 +39,7 @@ class Repeat_halloAdmin(admin.ModelAdmin):
 
 class Category_2_name_categoryAdmin(admin.ModelAdmin):
     fields=['name_category', 'category']
-    list_display = ('name_category', 'category', 'was_set_depart')
+    list_display = ('name_category', 'category')
 
 
 admin.site.register(Code_filial_2_name_filial, FilialAdmin)
