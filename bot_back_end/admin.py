@@ -14,7 +14,7 @@ class FilialAdmin(admin.ModelAdmin):
 
 class Three_categoriesAdmin(admin.ModelAdmin):
     fields=['text','category']
-    list_display = ('text','category')
+    list_display = ('text','category', 'get_name_category')
 
 
 class Category_managersAdmin(admin.ModelAdmin):

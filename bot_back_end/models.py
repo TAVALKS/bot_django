@@ -8,6 +8,18 @@ class Three_categories(models.Model):
     category = models.IntegerField('номер категории')
     def __str__(self):
         return self.text
+    @admin.display(
+        boolean=False,
+        ordering='category',
+        description='Категория',
+    )
+    def get_name_category(self):
+        name_category_bool = Category_2_name_category.objects.filter(category=self.category)
+        if name_category_bool:
+            name_category = Category_2_name_category.objects.get(category=self.category)
+            return name_category
+        else:
+            return 'Установите категорию'
     class Meta:
             verbose_name = 'Ключевое слово'
             verbose_name_plural = 'Ключевые слова'
