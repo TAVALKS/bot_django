@@ -142,7 +142,7 @@ class Category_2_name_category(models.Model):
 
 class Regions_name_and_code(models.Model):
     """модель для представления
-       кода категории
+       кода региона
        и названия региона
     """
     code_region = models.IntegerField('код региона')
@@ -152,3 +152,31 @@ class Regions_name_and_code(models.Model):
     class Meta:
             verbose_name = 'Регион'
             verbose_name_plural = 'Регионы'
+
+
+class Relate_code_region_and_filial(models.Model):
+    """модель для представления
+       кода региона
+       и кода филиала
+    """
+    code_region = models.IntegerField('код региона')
+    code_filial = models.IntegerField('код филиала')
+    @admin.display(
+        boolean=False,
+        ordering='code_filial',
+        description='филиал',
+    )
+    def get_filial(self):
+        filial = Code_filial_2_name_filial.objects.get(code_filial=self.code_filial).filial
+        return filial
+    @admin.display(
+        boolean=False,
+        ordering='code_filial',
+        description='регион',
+    )
+    def get_region(self):
+        name_region = Regions_name_and_code.objects.get(code_region=self.code_region).name_region
+        return name_region
+    class Meta:
+            verbose_name = 'Регион филиала'
+            verbose_name_plural = 'Регионы филиалов'

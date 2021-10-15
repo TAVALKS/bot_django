@@ -4,7 +4,8 @@ from django.contrib import admin
 from .models import Three_categories, Category_managers
 from .models import Code_filial_2_name_filial, Depart_filial_2_phone_number
 from .models import Worktime, Repeat_hallo, Category_2_name_category
-from .models import Regions_name_and_code
+from .models import Regions_name_and_code, Relate_code_region_and_filial
+
 
 class FilialAdmin(admin.ModelAdmin):
     fields=['filial','code_filial']
@@ -45,6 +46,10 @@ class Regions_name_and_codeAdmin(admin.ModelAdmin):
     fields=['code_region', 'name_region']
     list_display = ('code_region', 'name_region')
 
+class Relate_code_region_and_filialAdmin(admin.ModelAdmin):
+    fields=['code_region', 'code_filial']
+    list_display = ('code_region', 'code_filial', 'get_filial', 'get_region')
+
 
 admin.site.register(Code_filial_2_name_filial, FilialAdmin)
 admin.site.register(Three_categories, Three_categoriesAdmin)
@@ -54,3 +59,4 @@ admin.site.register(Worktime, WorktimeAdmin)
 admin.site.register(Repeat_hallo, Repeat_halloAdmin)
 admin.site.register(Category_2_name_category, Category_2_name_categoryAdmin)
 admin.site.register(Regions_name_and_code, Regions_name_and_codeAdmin)
+admin.site.register(Relate_code_region_and_filial, Relate_code_region_and_filialAdmin)
