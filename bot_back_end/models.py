@@ -4,6 +4,9 @@ from django.shortcuts import get_object_or_404
 
 # Create your models here.
 class Three_categories(models.Model):
+    """модель для представления таблицы
+       текст - категория
+    """
     text = models.CharField('ключ. слово', max_length=50)
     category = models.IntegerField('номер категории')
     def __str__(self):
@@ -26,6 +29,10 @@ class Three_categories(models.Model):
 
 
 class Category_managers(models.Model):
+    """модель для представления информации
+       о менеджере - ключю слово, имя,
+       доб. номер
+    """
     text = models.CharField('ключ. слово', max_length=50)
     name_man = models.CharField('имя менеджера', max_length=100)
     phone_number = models.CharField('доб. номер', max_length=12)
@@ -37,6 +44,9 @@ class Category_managers(models.Model):
 
 
 class Code_filial_2_name_filial(models.Model):
+    """модель для представления
+       цифрового кода филиала и названия филиала
+    """
     code_filial = models.IntegerField('код города филиала')
     filial = models.CharField('название филиала', max_length=50)
     def __str__(self):
@@ -58,6 +68,10 @@ class Code_filial_2_name_filial(models.Model):
 
 
 class Depart_filial_2_phone_number(models.Model):
+    """модель представления
+       добавочного номера отдела в
+       зависимости от филиала
+    """
     depart = models.CharField('отдел', max_length=50)
     filial = models.CharField('город филиала', max_length=50)
     phone_number = models.IntegerField('доб. номер')
@@ -83,6 +97,9 @@ class Depart_filial_2_phone_number(models.Model):
 
 
 class Worktime(models.Model):
+    """модель для представления
+       времени работы филиала
+    """
     filial = models.CharField('филиал', max_length=50)
     time_open = models.TimeField('Начало рабочего дня')
     time_close =models.TimeField('Конец рабочего дня')
@@ -94,6 +111,11 @@ class Worktime(models.Model):
 
 
 class Repeat_hallo(models.Model):
+    """модель для представления
+       фразы, когда человек говорит 'алло'
+       или другое слово с временем задержки
+       для ожидания следующего за 'алло' слова
+    """
     time_repeat = models.FloatField('время в секундах после фразы клиента')
     times_repeat= models.IntegerField('количестово повторов')
     phrase_repeat=models.CharField('фраза для повтора', max_length=50)
@@ -105,6 +127,10 @@ class Repeat_hallo(models.Model):
 
 
 class Category_2_name_category(models.Model):
+    """модель для представления
+       цифрового номера категории
+       и названия категории
+    """
     category = models.IntegerField('номер категории')
     name_category = models.CharField('название категории', max_length=20)
     def __str__(self):
@@ -112,3 +138,17 @@ class Category_2_name_category(models.Model):
     class Meta:
             verbose_name = 'Категория'
             verbose_name_plural = 'Категории'
+
+
+class Regions_name_and_code(models.Model):
+    """модель для представления
+       кода категории
+       и названия региона
+    """
+    code_region = models.IntegerField('код региона')
+    name_region = models.CharField('название региона', max_length=100)
+    def __str__(self):
+        return self.name_region
+    class Meta:
+            verbose_name = 'Регион'
+            verbose_name_plural = 'Регионы'
