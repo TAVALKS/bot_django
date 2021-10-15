@@ -31,6 +31,7 @@ class Depart_filial_2_phone_numberAdmin(admin.ModelAdmin):
 class WorktimeAdmin(admin.ModelAdmin):
     fields=['filial', 'time_open', 'time_close']
     list_display = ('filial', 'time_open', 'time_close')
+    ordering = ['time_open']
 
 
 class Repeat_halloAdmin(admin.ModelAdmin):
@@ -43,12 +44,15 @@ class Category_2_name_categoryAdmin(admin.ModelAdmin):
     list_display = ('name_category', 'category')
 
 class Regions_name_and_codeAdmin(admin.ModelAdmin):
-    fields=['code_region', 'name_region']
-    list_display = ('code_region', 'name_region')
+    fields=['name_region', 'code_region']
+    list_display = ('name_region', 'code_region')
+    list_filter = ['name_region']
+    ordering = ['name_region']
 
 class Relate_code_region_and_filialAdmin(admin.ModelAdmin):
     fields=['code_region', 'code_filial']
-    list_display = ('code_region', 'code_filial', 'get_filial', 'get_region')
+    list_display = ('get_filial', 'get_region')
+    ordering = ['code_filial', 'code_region']
 
 
 admin.site.register(Code_filial_2_name_filial, FilialAdmin)

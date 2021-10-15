@@ -161,6 +161,8 @@ class Relate_code_region_and_filial(models.Model):
     """
     code_region = models.IntegerField('код региона')
     code_filial = models.IntegerField('код филиала')
+    def __str__(self):
+        return Regions_name_and_code.objects.get(code_region=self.code_region).name_region
     @admin.display(
         boolean=False,
         ordering='code_filial',
