@@ -16,6 +16,7 @@ class FilialAdmin(admin.ModelAdmin):
 class Three_categoriesAdmin(admin.ModelAdmin):
     fields=['text','category']
     list_display = ('text', 'get_name_category')
+    ordering = ['text']
 
 
 class Category_managersAdmin(admin.ModelAdmin):
