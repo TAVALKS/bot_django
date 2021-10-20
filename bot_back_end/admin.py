@@ -44,16 +44,18 @@ class Category_2_name_categoryAdmin(admin.ModelAdmin):
     fields=['name_category', 'category']
     list_display = ('name_category', 'category')
 
+
 class Regions_name_and_codeAdmin(admin.ModelAdmin):
     fields=['name_region', 'code_region']
     list_display = ('name_region', 'code_region')
     list_filter = ['name_region']
     ordering = ['name_region']
 
+
 class Relate_code_region_and_filialAdmin(admin.ModelAdmin):
     fields=['code_region', 'code_filial']
-    list_display = ('get_filial', 'get_region')
-    ordering = ['code_filial', 'code_region']
+    list_display = ('get_region', 'get_filial')
+    ordering = ['code_region', 'code_filial']
 
 
 admin.site.register(Code_filial_2_name_filial, FilialAdmin)
