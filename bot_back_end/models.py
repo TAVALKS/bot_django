@@ -195,3 +195,6 @@ class Calltrack_lite(models.Model):
     region = models.IntegerField('код региона')
     dial_route = models.IntegerField('доб. номер')
     key_words = models.CharField('кл. слова', max_length=150)
+    class Meta:
+        verbose_name = 'Звонок'
+        verbose_name_plural = 'Звонки'
