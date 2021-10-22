@@ -5,7 +5,7 @@ from .models import Three_categories, Category_managers
 from .models import Code_filial_2_name_filial, Depart_filial_2_phone_number
 from .models import Worktime, Repeat_hallo, Category_2_name_category
 from .models import Regions_name_and_code, Relate_code_region_and_filial
-
+from .models import Calltrack_lite
 
 class FilialAdmin(admin.ModelAdmin):
     fields=['filial','code_filial']
@@ -58,6 +58,13 @@ class Relate_code_region_and_filialAdmin(admin.ModelAdmin):
     ordering = ['code_region', 'code_filial']
 
 
+class Calltrack_liteAdmin(admin.ModelAdmin):
+    fields=['id_rec', 'text', 'text_lemm', 'date_time_calling',
+            'innumber', 'region', 'dial_route', 'key_words']
+    list_display = ('date_time_calling')
+    ordering = ['date_time_calling']
+
+
 admin.site.register(Code_filial_2_name_filial, FilialAdmin)
 admin.site.register(Three_categories, Three_categoriesAdmin)
 admin.site.register(Category_managers, Category_managersAdmin)
@@ -67,3 +74,4 @@ admin.site.register(Repeat_hallo, Repeat_halloAdmin)
 admin.site.register(Category_2_name_category, Category_2_name_categoryAdmin)
 admin.site.register(Regions_name_and_code, Regions_name_and_codeAdmin)
 admin.site.register(Relate_code_region_and_filial, Relate_code_region_and_filialAdmin)
+admin.site.register(Calltrack_lite, Calltrack_liteAdmin)

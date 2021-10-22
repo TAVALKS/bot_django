@@ -186,7 +186,7 @@ class Relate_code_region_and_filial(models.Model):
             verbose_name_plural = 'Регионы филиалов'
 
 
-class calltrack_lite(models.Model):
+class Calltrack_lite(models.Model):
     id_rec = models.CharField('ID из астериск', max_length=14)
     text = models.TextField('фраза клиента', default='')
     text_lemm = models.TextField('нормализированная фраза', default='')
