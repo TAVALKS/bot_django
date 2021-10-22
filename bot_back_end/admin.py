@@ -61,7 +61,7 @@ class Relate_code_region_and_filialAdmin(admin.ModelAdmin):
 class Calltrack_liteAdmin(admin.ModelAdmin):
     fields=['id_rec', 'text', 'text_lemm', 'date_time_calling',
             'innumber', 'region', 'dial_route', 'key_words']
-    list_display = ('date_time_calling')
+    list_display = ('date_time_calling', 'id_rec')
     ordering = ['date_time_calling']
 
 
