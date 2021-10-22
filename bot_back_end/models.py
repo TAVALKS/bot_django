@@ -1,6 +1,8 @@
 from django.db import models
+from datetime import datetime
 from django.contrib import admin
 from django.shortcuts import get_object_or_404
+
 
 # Create your models here.
 class Three_categories(models.Model):
@@ -73,7 +75,7 @@ class Depart_filial_2_phone_number(models.Model):
        зависимости от филиала
     """
     depart = models.CharField('отдел', max_length=50)
-    filial = models.CharField('город филиала', max_length=50)
+    filial = models.CharField('филиал', max_length=50)
     phone_number = models.IntegerField('доб. номер')
     info = models.CharField('инфо', max_length=50)
     def __str__(self):
@@ -182,3 +184,14 @@ class Relate_code_region_and_filial(models.Model):
     class Meta:
             verbose_name = 'Регион филиала'
             verbose_name_plural = 'Регионы филиалов'
+
+
+class calltrack_lite(models.Model):
+    id_rec = models.CharField('ID из астериск', max_length=14)
+    text = models.TextField('фраза клиента', default='')
+    text_lemm = models.TextField('нормализированная фраза', default='')
+    date_time_calling = models.DateTimeField('время звонка', default=datetime.now())
+    innumber = models.CharField('номер тел.', max_length=11)
+    region = models.IntegerField('код региона')
+    dial_route = models.IntegerField('доб. номер')
+    key_words = models.CharField('кл. слова', max_length=150)
