@@ -24,7 +24,7 @@ class Three_categories(models.Model):
             name_category = Category_2_name_category.objects.get(category=self.category)
             return name_category
         else:
-            return 'Установите категорию'
+            return f'Установите категорию:{self.category}'
     class Meta:
             verbose_name = 'Ключевое слово'
             verbose_name_plural = 'Ключевые слова'

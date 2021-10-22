@@ -17,6 +17,7 @@ class Three_categoriesAdmin(admin.ModelAdmin):
     fields=['text','category']
     list_display = ('text', 'get_name_category')
     ordering = ['text']
+    list_filter = ['category']
 
 
 class Category_managersAdmin(admin.ModelAdmin):
