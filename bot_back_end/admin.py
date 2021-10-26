@@ -56,6 +56,7 @@ class Regions_name_and_codeAdmin(admin.ModelAdmin):
 class Relate_code_region_and_filialAdmin(admin.ModelAdmin):
     fields=['code_region', 'code_filial']
     list_display = ('get_region', 'get_filial')
+    list_filter = ['code_filial']
     ordering = ['code_region', 'code_filial']
 
 
