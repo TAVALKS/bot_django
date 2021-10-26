@@ -48,7 +48,7 @@ class Category_2_name_categoryAdmin(admin.ModelAdmin):
 
 class Regions_name_and_codeAdmin(admin.ModelAdmin):
     fields=['name_region', 'code_region']
-    list_display = ('name_region', 'code_region')
+    list_display = ('name_region', 'code_region', 'is_set_filial')
     list_filter = ['name_region']
     ordering = ['name_region']
 

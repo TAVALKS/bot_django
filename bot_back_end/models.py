@@ -151,6 +151,17 @@ class Regions_name_and_code(models.Model):
     name_region = models.CharField('название региона', max_length=100)
     def __str__(self):
         return self.name_region
+    @admin.display(
+        boolean=True,
+        ordering='code_region',
+        description='филиал установлен?',
+    )
+    def is_set_filial(self):
+        available_filial_bool = Relate_code_region_and_filial.objects.filter(code_region=self.code_region)
+        if available_filial_bool:
+            return True
+        else:
+            return False
     class Meta:
             verbose_name = 'Регион'
             verbose_name_plural = 'Регионы'
@@ -181,6 +192,7 @@ class Relate_code_region_and_filial(models.Model):
     def get_region(self):
         name_region = Regions_name_and_code.objects.get(code_region=self.code_region).name_region
         return name_region
+
     class Meta:
             verbose_name = 'Регион филиала'
             verbose_name_plural = 'Регионы филиалов'
