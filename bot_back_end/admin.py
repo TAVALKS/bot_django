@@ -43,7 +43,8 @@ class Repeat_halloAdmin(admin.ModelAdmin):
 
 class Category_2_name_categoryAdmin(admin.ModelAdmin):
     fields=['name_category', 'category']
-    list_display = ('name_category', 'category')
+    list_display = ('name_category', 'category', 'was_set_added_phone_number')
+    ordering = ['name_category', 'category']
 
 
 class Regions_name_and_codeAdmin(admin.ModelAdmin):

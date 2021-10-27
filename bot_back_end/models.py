@@ -137,6 +137,17 @@ class Category_2_name_category(models.Model):
     name_category = models.CharField('название категории', max_length=20)
     def __str__(self):
         return self.name_category
+    @admin.display(
+        boolean=True,
+        ordering='category',
+        description='доб.номер отдела установлен?',
+    )
+    def was_set_added_phone_number(self):
+        set_added_phone_number_bool = Depart_filial_2_phone_number.objects.filter(depart=self.name_category)
+        if set_added_phone_number_bool:
+            return True
+        else:
+            return False
     class Meta:
             verbose_name = 'Категория'
             verbose_name_plural = 'Категории'
