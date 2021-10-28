@@ -67,6 +67,7 @@ class Calltrack_liteAdmin(admin.ModelAdmin):
     list_display = ['date_time_calling', 'innumber', 'text',
                     'region', 'dial_route', 'key_words']
     ordering = ['date_time_calling', 'id_rec']
+    list_filter = ['date_time_calling']
 
 
 admin.site.register(Code_filial_2_name_filial, FilialAdmin)
