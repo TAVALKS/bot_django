@@ -6,6 +6,8 @@ from .models import Code_filial_2_name_filial, Depart_filial_2_phone_number
 from .models import Worktime, Repeat_hallo, Category_2_name_category
 from .models import Regions_name_and_code, Relate_code_region_and_filial
 from .models import Calltrack_lite
+from .views import export_calltrack_xls
+
 
 class FilialAdmin(admin.ModelAdmin):
     fields=['filial','code_filial']
@@ -68,6 +70,12 @@ class Calltrack_liteAdmin(admin.ModelAdmin):
                     'region', 'dial_route', 'key_words']
     ordering = ['date_time_calling', 'id_rec']
     list_filter = ['date_time_calling']
+    actions = ['get_calltrack_xls']
+
+
+    @admin.action(description='Выгрузить таблицу звонков')
+    def get_calltrack_xls(modeladmin, request, queryset):
+        return export_calltrack_xls(request)
 
 
 admin.site.register(Code_filial_2_name_filial, FilialAdmin)
