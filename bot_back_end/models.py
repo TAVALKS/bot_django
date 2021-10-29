@@ -167,7 +167,7 @@ class Regions_name_and_code(models.Model):
         ordering='code_region',
         description='филиал установлен?',
     )
-    def is_set_filial(self):
+    def was_set_filial(self):
         available_filial_bool = Relate_code_region_and_filial.objects.filter(code_region=self.code_region)
         if available_filial_bool:
             return True
