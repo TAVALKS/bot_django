@@ -218,6 +218,14 @@ class Calltrack_lite(models.Model):
     region = models.IntegerField('код региона')
     dial_route = models.IntegerField('доб. номер')
     key_words = models.CharField('кл. слова', max_length=150)
+    @admin.display(
+        boolean=False,
+        ordering='region',
+        description='регион',
+    )
+    def get_region(self):
+        name_region = Regions_name_and_code.objects.get(code_region=self.region).name_region
+        return name_region
     class Meta:
         verbose_name = 'Звонок'
         verbose_name_plural = 'Звонки'
