@@ -21,5 +21,4 @@ urlpatterns = [
     path('bot_back_end/', include('bot_back_end.urls')),
     path('admin/', admin.site.urls),
     path('about/', include('bot_back_end.urls')),
-    path('export/xls/', include('bot_back_end.urls'))
 ]
