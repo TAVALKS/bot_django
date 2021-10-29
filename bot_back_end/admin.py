@@ -19,11 +19,13 @@ class Three_categoriesAdmin(admin.ModelAdmin):
     list_display = ('text', 'get_name_category')
     ordering = ['text']
     list_filter = ['category']
+    search_fields = ['text']
 
 
 class Category_managersAdmin(admin.ModelAdmin):
     fields=['text', 'phone_number', 'name_man']
     list_display = ('text', 'phone_number', 'name_man')
+    search_fields = ['text']
 
 
 class Depart_filial_2_phone_numberAdmin(admin.ModelAdmin):
