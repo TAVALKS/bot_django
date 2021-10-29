@@ -24,7 +24,8 @@ class Three_categoriesAdmin(admin.ModelAdmin):
 
 class Category_managersAdmin(admin.ModelAdmin):
     fields=['text', 'phone_number', 'name_man']
-    list_display = ('text', 'phone_number', 'name_man')
+    list_display = ('name_man', 'phone_number', 'text')
+    ordering = ['name_man', 'text']
     search_fields = ['text']
 
 
