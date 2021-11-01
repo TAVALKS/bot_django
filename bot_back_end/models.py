@@ -229,3 +229,13 @@ class Calltrack_lite(models.Model):
     class Meta:
         verbose_name = 'Звонок'
         verbose_name_plural = 'Звонки'
+
+
+class Departs(models.Model):
+    depart_name = models.CharField(max_length=150)
+    depart_added_phone_number = models.CharField('номер тел.', max_length=11)
+    def __str__(self):
+        return self.depart_name
+    class Meta:
+        verbose_name = 'Отдел'
+        verbose_name_plural = 'Отделы'
