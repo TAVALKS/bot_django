@@ -78,6 +78,7 @@ class Calltrack_liteAdmin(admin.ModelAdmin):
     def get_calltrack_xls(modeladmin, request, queryset):
         return export_calltrack_xls(request)
 
+
 class DepartsAdmmin(admin.ModelAdmin):
     fields = ['depart_name', 'depart_added_phone_number']
     list_display = ['depart_name', 'depart_added_phone_number']
