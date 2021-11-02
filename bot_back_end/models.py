@@ -218,6 +218,7 @@ class Calltrack_lite(models.Model):
     region = models.IntegerField('код региона')
     dial_route = models.IntegerField('доб. номер')
     key_words = models.CharField('кл. слова', max_length=150)
+    result_recognition = models.CharField('распознование', max_length=50)
     @admin.display(
         boolean=False,
         ordering='region',
