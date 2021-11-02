@@ -232,7 +232,7 @@ class Calltrack_lite(models.Model):
 
 
 class Departs(models.Model):
-    depart_name = models.CharField(max_length=150)
+    depart_name = models.CharField('название отдела', max_length=150)
     depart_added_phone_number = models.CharField('номер тел.', max_length=11)
     def __str__(self):
         return self.depart_name

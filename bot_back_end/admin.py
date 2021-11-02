@@ -80,6 +80,7 @@ class Calltrack_liteAdmin(admin.ModelAdmin):
 
 class DepartsAdmmin(admin.ModelAdmin):
     fields = ['depart_name', 'depart_added_phone_number']
+    list_display = ['depart_name', 'depart_added_phone_number']
     ordering = ['depart_name']
 
 
