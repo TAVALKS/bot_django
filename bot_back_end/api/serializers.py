@@ -10,6 +10,19 @@ class Calltrack_liteSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class Calltrack_liteDetailSerializer(serializers.ModelSerializer):
+
+    depart = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Calltrack_lite
+        fields = '__all__'
+
+    @staticmethod
+    def get_depart(obj):
+        return DepartsSerializer(Departs.objects.filter(depart_added_phone_number=obj.dial_route), many=True).data
+
+
 class DepartsSerializer(serializers.ModelSerializer):
 
     class Meta:
