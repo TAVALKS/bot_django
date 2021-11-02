@@ -67,9 +67,11 @@ class Relate_code_region_and_filialAdmin(admin.ModelAdmin):
 
 class Calltrack_liteAdmin(admin.ModelAdmin):
     fields=['id_rec', 'text', 'text_lemm', 'date_time_calling',
-            'innumber', 'region', 'dial_route', 'key_words']
+            'innumber', 'region', 'dial_route', 'key_words',
+            'result_recognition']
     list_display = ['date_time_calling', 'innumber', 'text',
-                    'key_words', 'get_depart', 'get_region']
+                    'key_words', 'get_depart', 'get_region',
+                    'result_recognition']
     ordering = ['date_time_calling', 'id_rec']
     list_filter = ['date_time_calling']
     actions = ['get_calltrack_xls']
