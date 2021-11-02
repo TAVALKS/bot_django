@@ -69,7 +69,7 @@ class Calltrack_liteAdmin(admin.ModelAdmin):
     fields=['id_rec', 'text', 'text_lemm', 'date_time_calling',
             'innumber', 'region', 'dial_route', 'key_words']
     list_display = ['date_time_calling', 'innumber', 'text',
-                    'dial_route', 'key_words', 'get_region']
+                    'key_words', 'get_depart', 'get_region']
     ordering = ['date_time_calling', 'id_rec']
     list_filter = ['date_time_calling']
     actions = ['get_calltrack_xls']
@@ -81,7 +81,7 @@ class Calltrack_liteAdmin(admin.ModelAdmin):
 class DepartsAdmmin(admin.ModelAdmin):
     fields = ['depart_name', 'depart_added_phone_number']
     list_display = ['depart_name', 'depart_added_phone_number']
-    ordering = ['depart_name']
+    ordering = ['depart_added_phone_number']
 
 
 admin.site.register(Code_filial_2_name_filial, FilialAdmin)

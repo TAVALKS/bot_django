@@ -226,6 +226,17 @@ class Calltrack_lite(models.Model):
     def get_region(self):
         name_region = Regions_name_and_code.objects.get(code_region=self.region).name_region
         return name_region
+    @admin.display(
+        boolean=False,
+        ordering='dial_route',
+        description='перевод',
+    )
+    def get_depart(self):
+        depart_name_bool = Departs.objects.filter(depart_added_phone_number=self.dial_route)
+        if depart_name_bool:
+            return Departs.objects.get(depart_added_phone_number=self.dial_route).depart_name
+        else:
+            return self.dial_route
     class Meta:
         verbose_name = 'Звонок'
         verbose_name_plural = 'Звонки'
