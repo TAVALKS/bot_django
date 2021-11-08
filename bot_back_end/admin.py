@@ -72,6 +72,7 @@ class Calltrack_liteAdmin(admin.ModelAdmin):
                     'result_recognition']
     ordering = ['date_time_calling', 'id_rec']
     list_filter = ['date_time_calling']
+    search_fields = ['innumber']
     actions = ['get_calltrack_xls']
 
     @admin.action(description='Выгрузить таблицу звонков')
