@@ -210,7 +210,7 @@ class Relate_code_region_and_filial(models.Model):
 
 
 class Calltrack_lite(models.Model):
-    id_rec = models.CharField('ID из астериск', max_length=14)
+    id_rec = models.CharField('ID из астериск', max_length=15)
     text = models.TextField('фраза клиента', default='')
     text_lemm = models.TextField('нормализированная фраза', default='')
     date_time_calling = models.DateTimeField('время звонка', default=datetime.now())
