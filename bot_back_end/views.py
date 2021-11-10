@@ -33,8 +33,10 @@ def export_calltrack_xls(request):
 
     # Sheet body, remaining rows
     font_style = xlwt.XFStyle()
+    start_date = request.GET.get('from', None)
+    end_date = request.GET.get('to', None)
 
-    rows = Calltrack_lite.objects.all().values_list(
+    rows = Calltrack_lite.objects.filter(date_time_calling__range=(start_date, end_date)).values_list(
         'id_rec', 'date_time_calling', 'text', 'innumber', 'region',
         'dial_route', 'key_words')
     for row in rows:
