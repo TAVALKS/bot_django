@@ -3,6 +3,7 @@ import datetime
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Calltrack_lite
+import datetime
 
 def index(request):
     return render(request, 'bot_back_end/index.html')
@@ -35,6 +36,7 @@ def export_calltrack_xls(request):
     font_style = xlwt.XFStyle()
     start_date = request.GET.get('from', None)
     end_date = request.GET.get('to', None)
+    end_date = str(datetime.datetime.strptime(end_date, '%Y-%m-%d')+datetime.timedelta(days=1))
 
     rows = Calltrack_lite.objects.filter(date_time_calling__range=(start_date, end_date)).values_list(
         'id_rec', 'date_time_calling', 'text', 'innumber', 'region',
