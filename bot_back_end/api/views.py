@@ -13,7 +13,7 @@ from ..models import (
 
 class Calltrack_liteViewSet(viewsets.ModelViewSet):
 
-    queryset = Calltrack_lite.objects.all()
+    queryset = Calltrack_lite.objects.all().order_by('-date_time_calling')
     serializer_class = Calltrack_liteSerializer
 
     action_to_serializer = {
@@ -31,6 +31,7 @@ class DepartViewSet(viewsets.ModelViewSet):
 
     queryset = Departs.objects.all()
     serializer_class = DepartsSerializer
+
 
 class Regions_name_and_codeViewSet(viewsets.ModelViewSet):
 
