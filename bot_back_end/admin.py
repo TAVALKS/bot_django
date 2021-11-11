@@ -25,6 +25,7 @@ class Category_managersAdmin(admin.ModelAdmin):
     list_display = ('name_man', 'phone_number', 'text')
     ordering = ['name_man', 'text']
     search_fields = ['text']
+    list_filter = ['name_man']
 
 
 class Depart_filial_2_phone_numberAdmin(admin.ModelAdmin):
