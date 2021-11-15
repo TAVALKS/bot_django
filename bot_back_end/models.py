@@ -233,9 +233,10 @@ class Calltrack_lite(models.Model):
         description='перевод',
     )
     def get_depart(self):
-        depart_name_bool = Departs.objects.filter(depart_added_phone_number=self.dial_route)
-        if depart_name_bool:
+        if Departs.objects.filter(depart_added_phone_number=self.dial_route):
             return Departs.objects.get(depart_added_phone_number=self.dial_route).depart_name
+        elif Category_managers.objects.filter(phone_number=self.dial_route):
+            return Category_managers.objects.filter(phone_number=self.dial_route).values_list('name_man')[0]
         else:
             return self.dial_route
     class Meta:
