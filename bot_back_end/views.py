@@ -1,8 +1,11 @@
 import xlwt
+import json
 import datetime
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Calltrack_lite
+from django.http import JsonResponse
+from .models import Departs, Category_managers
 import datetime
 
 def index(request):
@@ -51,4 +54,18 @@ def export_calltrack_xls(request):
                 ws.write(row_num, col_num, row[col_num], font_style)
 
     wb.save(response)
+    return response
+
+
+def get_depart_or_name_manager(request):
+    dial_route = request.GET.get('dial_route')
+
+    if Departs.objects.filter(depart_added_phone_number=dial_route):
+        name = Departs.objects.get(depart_added_phone_number=dial_route).depart_name
+    elif Category_managers.objects.filter(phone_number=dial_route):
+        name = Category_managers.objects.filter(phone_number=dial_route).values_list('name_man')[0][0]
+    else:
+        name = dial_route
+    response = JsonResponse({'name': name})
+    print('response:', response)
     return response
