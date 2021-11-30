@@ -67,5 +67,4 @@ def get_depart_or_name_manager(request):
     else:
         name = dial_route
     response = JsonResponse({'name': name})
-    print('response:', response)
     return response
