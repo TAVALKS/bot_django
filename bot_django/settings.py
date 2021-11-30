@@ -26,7 +26,8 @@ SECRET_KEY = 'django-insecure-8clqcmwd3v+!+rvdrd17h_g3aq17*e8l7c#wmc6^b(h6f=-x*1
 DEBUG = True
 
 ALLOWED_HOSTS = ['51.250.20.245',
-                 'asteramk.ru-central1.internal']
+                 'asteramk.ru-central1.internal',
+                 '127.0.0.1',]
 
 
 # Application definition
