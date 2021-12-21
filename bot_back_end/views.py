@@ -1,12 +1,19 @@
+import os
+import openpyxl
+import io
 import xlwt
 import json
 import datetime
+from django import forms
+import pandas as pd
+from xlrd import open_workbook
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Calltrack_lite
 from django.http import JsonResponse
 from .models import Departs, Category_managers
 import datetime
+
 
 def index(request):
     return render(request, 'bot_back_end/index.html')
@@ -194,3 +201,102 @@ def get_region_name(city_code):
 
     name_filial = name_filials[city_code]
     return name_filial
+
+
+################################
+#Формирование файла с ответом###
+################################
+
+
+def get_wb_xls(path, filename =  'calltrack.xlsx'):
+    path_file = os.path.join(path, filename)
+    wb = open_workbook(path_file)
+    sheet_names = wb.sheet_names()
+    xl_sheet = wb.sheet_by_name(sheet_names[0])
+    rows = []
+    for row_idx in range(0, xl_sheet.nrows):    # Iterate through rows
+        rows.append([xl_sheet.cell(row_idx, 1), xl_sheet.cell(row_idx, 3), xl_sheet.cell(row_idx, 6)])
+    return rows
+
+
+def get_wb_csv(path, filename = 'mango.csv'):
+    path_file = os.path.join(path, filename)
+    df = pd.read_csv(path_file, encoding='cp1251', delimiter=';', header=1)
+    df = df[['Кто звонил', 'Участники']]
+    df = df[df['Участники'] != '-']
+    rows = []
+
+
+    for row in zip(df['Кто звонил'], df['Участники']):
+        s = row[1].split(',')
+        rows.append([row[0], s[-1].lstrip()])
+    return rows
+
+
+def get_z(x, y):
+    z = list()
+    for rowx in x:
+        for rowy in y:
+            telx = str(rowx[0])
+            tely = rowy[1].value
+            keys = rowy[2].value
+            if telx == tely and keys != 'Error' and keys != '':
+                z.append([rowy[0].value, rowx[1], tely, keys])
+    return z
+
+
+def export_missed_calls(z, path, filename="missedCalls.xls"):
+    path_file = os.path.join(path, filename)
+    response = HttpResponse(content_type='application/ms-excel')
+    response['Content-Disposition'] = 'attachment; filename="missedCalls.xlsx"'
+
+    wb = xlwt.Workbook(encoding='utf-8')
+    ws = wb.add_sheet('missedCalls')
+
+    # Sheet header, first row
+    row_num = 0
+
+    font_style = xlwt.XFStyle()
+    font_style.font.bold = True
+
+    columns = ['Дата и время', 'номер', 'имя менежера', 'кл. слова']
+
+    for col_num in range(len(columns)):
+        ws.write(row_num, col_num, columns[col_num], font_style)
+
+    # Sheet body, remaining rows
+    font_style = xlwt.XFStyle()
+
+    rows = z
+
+    for row in rows:
+        row_num += 1
+        for col_num in range(len(row)):
+            ws.write(row_num, col_num, row[col_num], font_style)
+
+    wb.save(path_file)
+    wb.save(response)
+    return response
+
+
+def save_file(f, itemfile):
+    with open(itemfile, 'wb+') as destination:
+        for chunk in f.chunks():
+            destination.write(chunk)
+
+
+def get_missed_calls(request):
+    path = os.path.join('/home/asterisk/bot_django/bot_back_end/media')
+    item_file_calltrack = os.path.join(path, 'calltrack.xlsx')
+    item_file_mango = os.path.join(path, 'mango.csv')
+    if request.method == 'POST':
+        calltrack =request.FILES['calltrack']
+        mango = request.FILES['mango']
+        save_file(calltrack, item_file_calltrack)
+        save_file(mango, item_file_mango)
+
+        x = get_wb_csv(path)
+        y = get_wb_xls(path)
+        z = get_z(x, y)
+        response = export_missed_calls(z, path)
+        return response
