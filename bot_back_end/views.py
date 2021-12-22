@@ -27,7 +27,7 @@ def export_calltrack_xls(request):
     response = HttpResponse(content_type='application/ms-excel')
     response['Content-Disposition'] = 'attachment; filename="calltrack.xls"'
 
-    wb = xlwt.Workbook(encoding='utf-8')
+    wb = xlwt.Workbook(encoding='utf-8', errors='ignore')
     ws = wb.add_sheet('calltrack')
 
     # Sheet header, first row
@@ -245,7 +245,7 @@ def get_z(x, y):
     return z
 
 
-def export_missed_calls(z, path, filename="missedCalls.xls"):
+def export_missed_calls(z, path, filename="missedCalls.xlsx"):
     path_file = os.path.join(path, filename)
     response = HttpResponse(content_type='application/ms-excel')
     response['Content-Disposition'] = 'attachment; filename="missedCalls.xlsx"'
@@ -274,7 +274,6 @@ def export_missed_calls(z, path, filename="missedCalls.xls"):
         for col_num in range(len(row)):
             ws.write(row_num, col_num, row[col_num], font_style)
 
-    wb.save(path_file)
     wb.save(response)
     return response
 
@@ -286,8 +285,8 @@ def save_file(f, itemfile):
 
 
 def get_missed_calls(request):
-    path = os.path.join('/home/asterisk/bot_django/bot_back_end/media')
-    item_file_calltrack = os.path.join(path, 'calltrack.xlsx')
+    path = '/home/asterisk/bot_django/bot_back_end/media'
+    item_file_calltrack = os.path.join(path, 'calltrack.xls')
     item_file_mango = os.path.join(path, 'mango.csv')
     if request.method == 'POST':
         calltrack =request.FILES['calltrack']
@@ -295,8 +294,8 @@ def get_missed_calls(request):
         save_file(calltrack, item_file_calltrack)
         save_file(mango, item_file_mango)
 
-        x = get_wb_csv(path)
-        y = get_wb_xls(path)
-        z = get_z(x, y)
-        response = export_missed_calls(z, path)
-        return response
+    x = get_wb_csv(path)
+    y = get_wb_xls(path)
+    z = get_z(x, y)
+    response = export_missed_calls(z, path)
+    return response
